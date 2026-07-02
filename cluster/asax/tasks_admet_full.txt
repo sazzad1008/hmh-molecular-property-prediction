@@ -1,0 +1,15 @@
+AMES
+hERG
+hERG_Karim
+DILI
+HIA
+BBB
+Pgp
+Bioavailability
+CYP2C9_inhibition
+CYP2D6_inhibition
+CYP3A4_inhibition
+CYP2C9_substrate
+CYP2D6_substrate
+CYP3A4_substrate
+

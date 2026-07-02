@@ -2,11 +2,14 @@ __pycache__/
 *.py[cod]
 .DS_Store
 .venv/
+.venv-tdc-hmh/
 venv/
 env/
 .ipynb_checkpoints/
 data/
 runs/
+data_*/
+runs_*/
 *.pt
 *.pth
 *.ckpt

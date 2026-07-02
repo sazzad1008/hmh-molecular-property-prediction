@@ -23,14 +23,27 @@ The project focuses on binary molecular property prediction tasks such as AMES t
 | `DILI` | `Tox` | `DILI` |
 | `HIA` | `ADME` | `HIA_Hou` |
 | `BBB` | `ADME` | `BBB_Martins` |
+| `Pgp` | `ADME` | `Pgp_Broccatelli` |
+| `Bioavailability` | `ADME` | `Bioavailability_Ma` |
 | `CYP2C9_inhibition` | `ADME` | `CYP2C9_Veith` |
 | `CYP2D6_inhibition` | `ADME` | `CYP2D6_Veith` |
 | `CYP3A4_inhibition` | `ADME` | `CYP3A4_Veith` |
+| `CYP2C9_substrate` | `ADME` | `CYP2C9_Substrate_CarbonMangels` |
+| `CYP2D6_substrate` | `ADME` | `CYP2D6_Substrate_CarbonMangels` |
+| `CYP3A4_substrate` | `ADME` | `CYP3A4_Substrate_CarbonMangels` |
 
 ## Repository Structure
 
 ```text
 .
+├── cluster/
+│   └── asax/
+│       ├── README_ASAX.md
+│       ├── setup_env.sh
+│       ├── pbs_smoke_test.pbs
+│       ├── pbs_train_one.pbs
+│       ├── pbs_array_admet.pbs
+│       └── collect_metrics.py
 ├── notebooks/
 │   └── TDC_ADMET_HMH_classification.ipynb
 ├── scripts/
@@ -83,9 +96,30 @@ Outputs are saved under `runs/`, and cached HMH feature tensors are saved under 
 
 ## Cluster Usage
 
-On a Slurm cluster, use the script rather than the notebook. A typical job should request CPU cores for HMH feature generation and optionally a GPU for neural network training.
+On a cluster, use the script rather than the notebook. ASA-X/PBS job files are included under:
 
-Example command inside a Slurm job:
+```text
+cluster/asax/
+```
+
+Start with the ASA-X guide:
+
+```bash
+cat cluster/asax/README_ASAX.md
+```
+
+Typical ASA-X workflow:
+
+```bash
+bash cluster/asax/setup_env.sh
+qsub cluster/asax/pbs_smoke_test.pbs
+qsub cluster/asax/pbs_train_one.pbs
+qsub cluster/asax/pbs_array_admet.pbs
+```
+
+A typical job should request CPU cores for HMH feature generation and optionally a GPU for neural network training.
+
+Example command inside a cluster job:
 
 ```bash
 python scripts/train_tdc_hmh.py \

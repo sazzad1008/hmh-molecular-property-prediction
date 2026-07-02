@@ -31,9 +31,14 @@ TDC_TASKS = {
     "DILI": ("Tox", "DILI"),
     "HIA": ("ADME", "HIA_Hou"),
     "BBB": ("ADME", "BBB_Martins"),
+    "Pgp": ("ADME", "Pgp_Broccatelli"),
+    "Bioavailability": ("ADME", "Bioavailability_Ma"),
     "CYP2C9_inhibition": ("ADME", "CYP2C9_Veith"),
     "CYP2D6_inhibition": ("ADME", "CYP2D6_Veith"),
     "CYP3A4_inhibition": ("ADME", "CYP3A4_Veith"),
+    "CYP2C9_substrate": ("ADME", "CYP2C9_Substrate_CarbonMangels"),
+    "CYP2D6_substrate": ("ADME", "CYP2D6_Substrate_CarbonMangels"),
+    "CYP3A4_substrate": ("ADME", "CYP3A4_Substrate_CarbonMangels"),
 }
 
 ATOM_TYPES = ["C", "N", "O", "S", "F", "P", "Cl", "Br", "I", "B", "Si", "Se", "other"]

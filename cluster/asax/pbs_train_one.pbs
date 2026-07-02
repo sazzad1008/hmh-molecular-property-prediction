@@ -1,0 +1,46 @@
+#!/bin/bash
+#PBS -N hmh_tdc_one
+#PBS -l select=1:ncpus=8:mem=32gb
+#PBS -l walltime=08:00:00
+#PBS -j oe
+#PBS -o logs/hmh_tdc_one.$PBS_JOBID.log
+
+set -euo pipefail
+
+cd "$PBS_O_WORKDIR"
+mkdir -p logs
+
+# If ASA-X requires modules, uncomment and adjust after checking `module avail`.
+# module purge
+# module load python/3.11
+
+source .venv-tdc-hmh/bin/activate
+
+TASK="${TASK:-Pgp}"
+SEED="${SEED:-42}"
+EPOCHS="${EPOCHS:-120}"
+N_JOBS="${N_JOBS:-8}"
+
+BASE_DIR="${BASE_DIR:-$HOME}"
+DATA_DIR="${DATA_DIR:-$BASE_DIR/hmh_admet_data/TDC}"
+CACHE_DIR="${CACHE_DIR:-$BASE_DIR/hmh_admet_cache}"
+OUTPUT_DIR="${OUTPUT_DIR:-$BASE_DIR/hmh_admet_runs}"
+
+echo "Job ID: $PBS_JOBID"
+echo "Task: $TASK"
+echo "Seed: $SEED"
+echo "Host: $(hostname)"
+echo "Workdir: $PWD"
+echo "Cache: $CACHE_DIR"
+echo "Output: $OUTPUT_DIR"
+
+python scripts/train_tdc_hmh.py \
+  --task "$TASK" \
+  --epochs "$EPOCHS" \
+  --seed "$SEED" \
+  --n-jobs "$N_JOBS" \
+  --data-dir "$DATA_DIR" \
+  --cache-dir "$CACHE_DIR" \
+  --output-dir "$OUTPUT_DIR" \
+  --cpu
+
